@@ -1,0 +1,46 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateServiceSpecificCredential",
+                "logs:DescribeLogStreams",
+                "iam:CreateRole",
+                "s3:CreateBucket",
+                "cloudformation:DescribeStackResource",
+                "iam:PutRolePolicy",
+                "apigateway:DELETE",
+                "iam:PassRole",
+                "s3:AbortMultipartUpload",
+                "apigateway:PATCH",
+                "cloudformation:UpdateStack",
+                "logs:FilterLogEvents",
+                "apigateway:GET",
+                "s3:DeleteObject",
+                "events:*",
+                "cloudformation:ListStackResources",
+                "iam:GetRole",
+                "s3:ListBucketMultipartUploads",
+                "apigateway:PUT",
+                "cloudformation:DescribeStacks",
+                "s3:ListMultipartUploadParts",
+                "s3:PutObject",
+                "s3:GetObject",
+                "iam:CreateServiceLinkedRole",
+                "cloudformation:CreateStack",
+                "cloudformation:DeleteStack",
+                "lambda:*",
+                "apigateway:POST"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::flask.lawrencemcdaniel.com"
+        }
+    ]
+}
