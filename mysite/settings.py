@@ -34,8 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '127.0.0.1', 'q3f0lyq20h.execute-api.us-west-2.amazonaws.com', 'django.lawrencemcdaniel.com', ]
 
 
 # Application definition
@@ -60,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mysite.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -78,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database

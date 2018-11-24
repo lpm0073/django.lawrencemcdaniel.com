@@ -6,6 +6,8 @@
 * Django: https://www.djangoproject.com/
 * Django Bootstrap: https://django-bootstrap3.readthedocs.io/en/latest/index.html
 * Django Environment: https://github.com/joke2k/django-environ
+* Django - Zappa Guide: https://edgarroman.github.io/zappa-django-guide/
+
 
 
 ## Local dev environment setup

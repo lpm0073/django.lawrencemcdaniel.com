@@ -1,5 +1,6 @@
 .env
 .env3
+django-lawrence-dev-template*.json
 
 # OS generated files #
 ######################

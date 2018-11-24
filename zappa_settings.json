@@ -1,6 +1,6 @@
 {
     "dev": {
-        "django_settings": "app.settings",
+        "django_settings": "mysite.settings",
         "profile_name": "zappa",
         "project_name": "django-lawrence",
         "runtime": "python3.6",
