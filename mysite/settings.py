@@ -90,26 +90,14 @@ WSGI_APPLICATION = 'wsgi.application'
 #    }
 #}
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': env('RDS_DB_NAME'),
-#        'USER': env('RDS_USERNAME'),
-#        'PASSWORD': env('RDS_PASSWORD'),
-#        'HOST': env('RDS_HOSTNAME'),
-#        'PORT': env('RDS_PORT'),
-#    }
-#}
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django-lawrencemcdaniel',
-        'USER': 'django',
-        'PASSWORD': 'django',
-        'HOST': 'sql.lawrencemcdaniel.com',
-        'PORT': '3306',
+        'NAME': env('RDS_DB_NAME'),
+        'USER': env('RDS_USERNAME'),
+        'PASSWORD': env('RDS_PASSWORD'),
+        'HOST': env('RDS_HOSTNAME'),
+        'PORT': env('RDS_PORT'),
     }
 }
 
