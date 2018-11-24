@@ -1,5 +1,7 @@
-# django.lawrencemcdaniel.com
+# Serverless Django
+This is a serverless implementation of Python Django running on AWS Lambda & RDS via API Gateway.
 
+View the site: https://django.lawrencemcdaniel.com
 
 ## Resources
 * Zappa setup: https://blog.apcelent.com/deploy-flask-aws-lambda.html
