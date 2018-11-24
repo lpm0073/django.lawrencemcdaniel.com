@@ -5,7 +5,7 @@
 * Zappa setup: https://blog.apcelent.com/deploy-flask-aws-lambda.html
 * Django: https://www.djangoproject.com/
 * Django Bootstrap: https://django-bootstrap3.readthedocs.io/en/latest/index.html
-
+* Django Environment: https://github.com/joke2k/django-environ
 
 
 ## Local dev environment setup
