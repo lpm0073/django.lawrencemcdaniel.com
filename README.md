@@ -25,9 +25,9 @@ zappa init
 
 4. Run local Django web server:
 ```
-export FLASK_APP=app.py
-export FLASK_DEBUG=1
-flask run
+# cd into repository
+source .env3/bin/activate
+python mysite/manage.py runserver
 ```
 5. Deploy app to AWS
 ```
