@@ -1,9 +1,0 @@
-{
-    "dev": {
-        "django_settings": "mysite.settings",
-        "profile_name": "zappa",
-        "project_name": "django-lawrence",
-        "runtime": "python3.6",
-        "s3_bucket": "django.lawrencemcdaniel.com"
-    }
-}

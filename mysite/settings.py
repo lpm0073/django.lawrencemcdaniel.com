@@ -34,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = [ '127.0.0.1', 'q3f0lyq20h.execute-api.us-west-2.amazonaws.com', 'django.lawrencemcdaniel.com', ]
+ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.amazonaws.com', '.lawrencemcdaniel.com', ]
 
 
 # Application definition
@@ -89,14 +89,27 @@ WSGI_APPLICATION = 'wsgi.application'
 #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #    }
 #}
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': env('RDS_DB_NAME'),
+#        'USER': env('RDS_USERNAME'),
+#        'PASSWORD': env('RDS_PASSWORD'),
+#        'HOST': env('RDS_HOSTNAME'),
+#        'PORT': env('RDS_PORT'),
+#    }
+#}
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('RDS_DB_NAME'),
-        'USER': env('RDS_USERNAME'),
-        'PASSWORD': env('RDS_PASSWORD'),
-        'HOST': env('RDS_HOSTNAME'),
-        'PORT': env('RDS_PORT'),
+        'NAME': 'django-lawrencemcdaniel',
+        'USER': 'django',
+        'PASSWORD': 'django',
+        'HOST': 'sql.lawrencemcdaniel.com',
+        'PORT': '3306',
     }
 }
 
