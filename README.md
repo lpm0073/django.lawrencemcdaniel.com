@@ -5,22 +5,21 @@ View the site: https://django.lawrencemcdaniel.com
 
 ## Resources
 * Zappa setup: https://blog.apcelent.com/deploy-flask-aws-lambda.html
-* Django: https://www.djangoproject.com/
-* Django Bootstrap: https://django-bootstrap3.readthedocs.io/en/latest/index.html
-* Django Environment: https://github.com/joke2k/django-environ
 * Django - Zappa Guide: https://edgarroman.github.io/zappa-django-guide/
+* Django: https://www.djangoproject.com/
+* Django Environment: https://github.com/joke2k/django-environ
 
 
 ## Local dev environment setup
-1. AWS Credentials
+1. add AWS Credentials to ~/.aws/credentials
 2. Install AWS CLI
 ```
 pip install awscli
 ```
-3. Create Virtual Environment
+3. Create Python Virtual Environment
 ```
 # cd to the local git repository
-virtualenv -p python3.6 .env3
+virtualenv -p python3.6 .env3   # note: Zappa requires Python 3.6
 source .env3/bin/activate
 pip install -r requirements.txt
 ```
