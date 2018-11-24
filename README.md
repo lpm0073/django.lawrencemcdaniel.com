@@ -9,7 +9,6 @@
 * Django - Zappa Guide: https://edgarroman.github.io/zappa-django-guide/
 
 
-
 ## Local dev environment setup
 1. AWS Credentials
 2. Install AWS CLI
@@ -22,7 +21,6 @@ pip install awscli
 virtualenv -p python3.6 .env3
 source .env3/bin/activate
 pip install -r requirements.txt
-zappa init
 ```
 
 4. Run local Django web server:
@@ -31,12 +29,29 @@ zappa init
 source .env3/bin/activate
 python mysite/manage.py runserver
 ```
-5. Deploy app to AWS
+5. Zappa commands
 ```
-zappa deploy dev
+zappa init         # see notes below on installation details
+zappa deploy dev   # Deploy app to AWS
+zappa undeploy dev # Delete from AWS
+zappa update dev   # update existing app to AWS
+zappa tail         # view Lambda execution log
+zappa -h
 ```
 
-6. Subsequent app updates to aws
-```
-zappa update dev
-```
+## settings.py notes
+- DATABASES: changed settings to AWS RDS MySQL. config settings are stored locally in mysite/.env
+- ALLOWED_HOSTS: added FQDN's for amazon.com and lawrencemcdaniel.com per suggestions in teh Django - Zappa Guide
+- SECRET_KEY: moved to locally-stored .env file
+- DEBUG:  moved to locally-stored .env file
+
+
+## Zappa setup notes
+- accept all of the defaults in zappa init
+- manually add vpc_config section to zappa_settings.json
+
+## .gitignore notes
+added the following:
+- DjangoTemplates.env
+- .env3
+- django-lawrence-dev-template*.json
