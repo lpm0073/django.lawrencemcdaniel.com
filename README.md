@@ -1,5 +1,5 @@
 # Serverless Django
-This is a serverless implementation of Python Django running on AWS Lambda & RDS via API Gateway.
+This is a serverless implementation of Python Django running on AWS Lambda & RDS via API Gateway + S3 static asset hosting.
 
 View the site:
 - https://django.lawrencemcdaniel.com/
