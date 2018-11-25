@@ -11,7 +11,9 @@ View the site:
 * Django - Zappa Guide: https://edgarroman.github.io/zappa-django-guide/
 * Django: https://www.djangoproject.com/
 * Django Environment: https://github.com/joke2k/django-environ
-
+* Django static asset w Zappa: https://docs.djangoproject.com/en/2.1/howto/static-files/
+* Using Amazon S3 to Store your Django Site's Static and Media Files: https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
+* Static files - Django Official Documentation: https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 ## Local dev environment setup
 1. add AWS Credentials to ~/.aws/credentials
@@ -42,6 +44,7 @@ zappa init         # see notes below on installation details
 zappa deploy dev   # Deploy app to AWS
 zappa undeploy dev # Delete from AWS
 zappa update dev   # update existing app to AWS
+zappa manage dev "collectstatic --noinput"    # collect static assets
 zappa tail         # view Lambda execution log
 zappa -h
 ```

@@ -2,3 +2,5 @@ django
 mysqlclient
 zappa
 django-environ
+django-storages
+boto3
