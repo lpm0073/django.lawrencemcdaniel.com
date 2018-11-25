@@ -1,7 +1,10 @@
 # Serverless Django
 This is a serverless implementation of Python Django running on AWS Lambda & RDS via API Gateway.
 
-View the site: https://django.lawrencemcdaniel.com
+View the site:
+- https://django.lawrencemcdaniel.com/
+- https://atxft59ikc.execute-api.us-west-2.amazonaws.com/dev
+
 
 ## Resources
 * Zappa setup: https://blog.apcelent.com/deploy-flask-aws-lambda.html
@@ -30,7 +33,10 @@ pip install -r requirements.txt
 source .env3/bin/activate
 python mysite/manage.py runserver
 ```
-5. Zappa commands
+5. Setup IAM user for Zappa
+see aws-iam-policy.json for a quasi-correct example of minimum settings. This currently is still lacking one or more as-of-yet unknown permissions. The workaround in to temporarily make the IAM user an AWS admin (very bad.)
+
+6. Zappa commands
 ```
 zappa init         # see notes below on installation details
 zappa deploy dev   # Deploy app to AWS
