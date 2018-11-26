@@ -1,21 +1,28 @@
 # Serverless Django
 This is a serverless implementation of Python Django running on AWS Lambda & RDS via API Gateway + S3 static asset hosting.
 
-View the site:
+### View the site:
 - https://django.lawrencemcdaniel.com/
 - https://atxft59ikc.execute-api.us-west-2.amazonaws.com/dev
 
 
-## Resources
-* Zappa setup: https://blog.apcelent.com/deploy-flask-aws-lambda.html
-* Django - Zappa Guide: https://edgarroman.github.io/zappa-django-guide/
+
+## About This Stack
+
+### Stack Resources
 * Django: https://www.djangoproject.com/
 * Django Environment: https://github.com/joke2k/django-environ
-* Django static asset w Zappa: https://docs.djangoproject.com/en/2.1/howto/static-files/
 * Using Amazon S3 to Store your Django Site's Static and Media Files: https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
 * Static files - Django Official Documentation: https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-## Local dev environment setup
+
+## Zappa Deployment to AWS Lambda
+
+### Zappa Deployment Resources
+* Zappa setup: https://blog.apcelent.com/deploy-flask-aws-lambda.html
+* Django - Zappa Guide: https://edgarroman.github.io/zappa-django-guide/
+* Django static asset w Zappa: https://docs.djangoproject.com/en/2.1/howto/static-files/
+
 1. add AWS Credentials to ~/.aws/credentials
 2. Install AWS CLI
 ```

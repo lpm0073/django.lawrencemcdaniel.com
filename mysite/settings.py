@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.amazonaws.com', '.lawrencemcdaniel
 # Application definition
 
 INSTALLED_APPS = [
+    'djangobower',
     'storages',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
@@ -133,6 +134,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#======================= Bower Setup ================================
+# Reference: https://django-bower.readthedocs.io/en/latest/installation.html
+#======================= Bower Setup ================================
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
+#BOWER_PATH = '/usr/bin/bower'          # we might not need thisself.
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'popper.js',
+    'bootstrap',
+    'underscore',
+    'd3',
+)
+
 #======================= AWS Static File Storage ====================
 # Reference: https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
 #======================= AWS Static File Storage ====================

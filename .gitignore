@@ -2,6 +2,7 @@
 .env3
 django-lawrence-dev-template*.json
 static/*
+components
 
 # OS generated files #
 ######################

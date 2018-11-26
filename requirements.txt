@@ -4,3 +4,4 @@ zappa
 django-environ
 django-storages
 boto3
+django-bower
