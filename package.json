@@ -1,0 +1,22 @@
+{
+  "name": "django.lawrencemcdaniel.com",
+  "version": "1.0.0",
+  "description": "AWS Lambda Django blank canvas",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lpm0073/django.lawrencemcdaniel.com.git"
+  },
+  "author": "Lawrence McDaniel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lpm0073/django.lawrencemcdaniel.com/issues"
+  },
+  "homepage": "https://github.com/lpm0073/django.lawrencemcdaniel.com#readme",
+  "dependencies": {
+    "bower": "^1.8.4"
+  }
+}

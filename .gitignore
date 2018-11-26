@@ -1,8 +1,12 @@
+# Project code
+######################
 .env
 .env3
 django-lawrence-dev-template*.json
 static/*
 components
+npm_modules
+node_modules
 
 # OS generated files #
 ######################

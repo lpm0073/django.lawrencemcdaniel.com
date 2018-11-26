@@ -158,9 +158,9 @@ BOWER_INSTALLED_APPS = (
 #======================= AWS Static File Storage ====================
 STATIC_ROOT = 'static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+#]
 
 AWS_S3_OBJECT_PARAMETERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
