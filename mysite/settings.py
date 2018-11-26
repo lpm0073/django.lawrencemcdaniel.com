@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.amazonaws.com', '.lawrencemcdaniel
 
 INSTALLED_APPS = [
     'djangobower',
-    'storages',
+#    'storages',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -130,19 +130,25 @@ USE_L10N = True
 USE_TZ = True
 
 
+#======================= Static Setup ================================
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+# Reference: https://docs.djangoproject.com/en/2.1/howto/static-files/
+#======================= Static Setup ================================
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
 
-#======================= Bower Setup ================================
-# Reference: https://django-bower.readthedocs.io/en/latest/installation.html
-#======================= Bower Setup ================================
+STATICFILES_DIRS = [
+]
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
 )
+
+#======================= Bower Setup ================================
+# Reference: https://django-bower.readthedocs.io/en/latest/installation.html
+#======================= Bower Setup ================================
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 #BOWER_PATH = '/usr/bin/bower'          # we might not need thisself.
 BOWER_INSTALLED_APPS = (
@@ -156,12 +162,7 @@ BOWER_INSTALLED_APPS = (
 #======================= AWS Static File Storage ====================
 # Reference: https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
 #======================= AWS Static File Storage ====================
-STATIC_ROOT = 'static/'
-
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-#]
-
+'''
 AWS_S3_OBJECT_PARAMETERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
     'CacheControl': 'max-age=94608000',
@@ -183,3 +184,5 @@ STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 STATICFILES_LOCATION = 'static'
 MEDIAFILES_LOCATION = 'media'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+'''
