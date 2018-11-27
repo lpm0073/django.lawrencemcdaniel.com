@@ -10,6 +10,12 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import environ
 
+# required for tracking DEBUG value in templates
+# Reference: https://stackoverflow.com/questions/1271631/how-to-check-the-template-debug-flag-in-a-django-template/1271914
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -19,7 +25,8 @@ environ.Env.read_env()
 
 # False if not in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+#DEBUG = env('DEBUG')
+DEBUG = False
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -134,17 +141,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # Reference: https://docs.djangoproject.com/en/2.1/howto/static-files/
 #======================= Static Setup ================================
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
+STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
 STATIC_ROOT = 'static/'
 
+#tell django where to look where running collectstatic - literally
 STATICFILES_DIRS = [
 ]
 
+#tell django where to look where running collectstatic - via custom classes
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
 )
+#Reference: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#django.contrib.staticfiles.storage.ManifestStaticFilesStorage
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 
 #======================= Bower Setup ================================
 # Reference: https://django-bower.readthedocs.io/en/latest/installation.html
@@ -169,7 +182,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 
 AWS_STORAGE_BUCKET_NAME = 'zappa-bg95bqbw1'
-AWS_S3_REGION_NAME = 'us-west-2'  # e.g. us-east-2
+AWS_S3_REGION_NAME = 'us-west-2'
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_DEFAULT_ACL = None
@@ -184,5 +197,4 @@ STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 STATICFILES_LOCATION = 'static'
 MEDIAFILES_LOCATION = 'media'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-
 '''
