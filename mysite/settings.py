@@ -25,8 +25,8 @@ environ.Env.read_env()
 
 # False if not in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = env('DEBUG')
-DEBUG = False
+DEBUG = env('DEBUG')
+#DEBUG = False
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.amazonaws.com', '.lawrencemcdaniel
 # Application definition
 
 INSTALLED_APPS = [
+    'pipeline',
     'djangobower',
 #    'storages',
     'polls.apps.PollsConfig',
@@ -88,14 +89,6 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -145,19 +138,50 @@ USE_TZ = True
 STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
 STATIC_ROOT = 'static/'
 
-#tell django where to look where running collectstatic - literally
+#tell django where to look when running collectstatic - literally
 STATICFILES_DIRS = [
+# pretty sure we don't need this.
+    os.path.join(os.path.dirname(__file__), '..', 'components/bower_components'),
 ]
 
-#tell django where to look where running collectstatic - via custom classes
+#tell django where to look when running collectstatic - via custom classes
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.FileSystemFinder',
+    'pipeline.finders.AppDirectoriesFinder',
+    'pipeline.finders.CachedFileFinder',
+    'pipeline.finders.PipelineFinder',
     'djangobower.finders.BowerFinder',
 )
 #Reference: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#django.contrib.staticfiles.storage.ManifestStaticFilesStorage
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
+#======================= Pipeline Setup ================================
+# Reference: https://django-pipeline.readthedocs.io/en/latest/
+#======================= Pipeline Setup ================================
+PIPELINE = {
+    'PIPELINE_ENABLED': True,
+    'STYLESHEETS': {
+        'styles': {
+            'source_filenames': (
+              'bootstrap/dist/css/bootstrap.css',
+            ),
+            'output_filename': 'styles.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    },
+    'JAVASCRIPT': {
+        'scripts': {
+            'source_filenames': (
+              'jquery/dist/jquery.js',
+              #'popper.js/dist/popper.js',
+              'bootstrap/dist/js/bootstrap.js',
+            ),
+            'output_filename': 'scripts.js',
+        }
+    }
+}
 
 #======================= Bower Setup ================================
 # Reference: https://django-bower.readthedocs.io/en/latest/installation.html

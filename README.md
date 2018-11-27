@@ -6,7 +6,7 @@ This is a serverless implementation of Python Django running on AWS Lambda & RDS
 - https://atxft59ikc.execute-api.us-west-2.amazonaws.com/dev
 
 ### S3 Sync
-sync static/ https://s3.console.aws.amazon.com/s3/object/zappa-bg95bqbw1/ --profile zappa
+aws s3 sync ./static/ s3://zappa-bg95bqbw1/static/
 
 ## About This Stack
 
