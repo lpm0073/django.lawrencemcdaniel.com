@@ -8,7 +8,16 @@ This is a serverless implementation of Python Django running on AWS Lambda & RDS
 ### S3 Sync
 aws s3 sync ./static/ s3://zappa-bg95bqbw1/static/
 
-## About This Stack
+## About This Configuration
+- django: latest version.
+- mysqlclient: latest version. used to faciliate connections to AWS RDS MySQL
+- zappa: latest version. used to deploy this code base to AWS Lambda
+- django-environ: latest version. to strip sensitive data (passwords, IAM credentials, etc) from the code base
+- django-bower: latest version. front-end package manager. manages jquery, popper, bootstrap, d3, etc.
+- django-npm: latest version. facilitates calls to Node Package Manager from within Python.
+- django-pipeline: Deployment work flow management.
+- boto3: not currently in use.
+- django-storages: not currently in use.
 
 ### Stack Resources
 * Django: https://www.djangoproject.com/
