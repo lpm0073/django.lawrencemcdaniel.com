@@ -139,8 +139,7 @@ else:
     STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = 'static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # tell django the full path to the location of all static assets
 STATICFILES_DIRS = [
@@ -166,13 +165,15 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 #        'pipeline.compilers.sass.SASSCompiler',
 #    },
 #'PIPELINE_ENABLED': True,
+#'popper.js/dist/popper.js',
 #======================= Pipeline Setup ================================
 PIPELINE = {
+    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.jsmin.JSMinCompressor',
     'STYLESHEETS': {
         'pollsX': {
             'source_filenames': (
               'bootstrap/dist/css/bootstrap.css',
-              'mysite/static/css/*'
             ),
             'output_filename': 'styles.css',
             'extra_context': {
@@ -191,6 +192,7 @@ PIPELINE = {
         }
     }
 }
+
 
 #======================= Bower Setup ================================
 # Reference: https://django-bower.readthedocs.io/en/latest/installation.html

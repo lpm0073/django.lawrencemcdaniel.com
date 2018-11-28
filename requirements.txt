@@ -7,3 +7,4 @@ boto3
 django-bower
 django-npm
 django-pipeline
+jsmin
