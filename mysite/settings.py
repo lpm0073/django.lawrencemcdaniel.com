@@ -133,17 +133,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # Reference: https://docs.djangoproject.com/en/2.1/howto/static-files/
 #======================= Static Setup ================================
-#STATIC_URL = '/static/'
 if DEBUG:
     STATIC_URL = '/static/'
 else:
     STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
 
+# The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = 'static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # tell django the full path to the location of all static assets
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mysite', 'polls', 'staticfiles'),
 ]
 
 #tell django where to look when running collectstatic - via custom classes
@@ -159,19 +160,19 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 #======================= Pipeline Setup ================================
 # Reference: https://django-pipeline.readthedocs.io/en/latest/
+#    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+#    'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+#    'COMPILERS': {
+#        'pipeline.compilers.sass.SASSCompiler',
+#    },
+#'PIPELINE_ENABLED': True,
 #======================= Pipeline Setup ================================
 PIPELINE = {
-    'PIPELINE_ENABLED': True,
-    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
-    'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
-    'COMPILERS': {
-        'pipeline.compilers.sass.SASSCompiler',
-    },
     'STYLESHEETS': {
-        'styles': {
+        'pollsX': {
             'source_filenames': (
               'bootstrap/dist/css/bootstrap.css',
-              '../mysite/static/css/*'
+              'mysite/static/css/*'
             ),
             'output_filename': 'styles.css',
             'extra_context': {
@@ -180,13 +181,13 @@ PIPELINE = {
         },
     },
     'JAVASCRIPT': {
-        'scripts': {
+        'pollsX': {
             'source_filenames': (
               'jquery/dist/jquery.js',
-              #'popper.js/dist/popper.js',
+              'popper.js/dist/popper.js',
               'bootstrap/dist/js/bootstrap.js',
             ),
-            'output_filename': 'scripts.js',
+            'output_filename': 'bundle.js',
         }
     }
 }

@@ -1,4 +1,5 @@
 {% load static %}
+{% load pipeline %}
 
 <!DOCTYPE html>
 <html lang='en_us'>
@@ -8,16 +9,12 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>{% block title %}{% endblock %}</title>
 
-      <link rel="stylesheet" href='{% static 'styles.css' %}'>
+      <!-- Pipeline bundled css -->
+      {% stylesheet 'pollsX' %}
       {% if debug %}
         <!-- add stuff that only links when in Debug mode -->
       {% else %}
       {% endif %}
-      <script>
-        function hello () {
-          document.getElementById('hello').innerHTML = 'Hello World!'
-        }
-      </script>
       {% block head %}{% endblock %}
     </head>
     <body onload="hello();">
@@ -26,7 +23,8 @@
         {% endblock %}
       </div>
 
-      <script type="text/javascript" src='{% static 'scripts.js' %}'></script>
+      <!-- Pipeline bundled js -->
+      {% javascript 'pollsX' %}
       {% if debug %}
         <!-- add stuff that only links when in Debug mode -->
       {% else %}
