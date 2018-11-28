@@ -26,7 +26,6 @@ environ.Env.read_env()
 # False if not in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
-#DEBUG = False
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -46,7 +45,6 @@ ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.amazonaws.com', '.lawrencemcdaniel
 INSTALLED_APPS = [
     'pipeline',
     'djangobower',
-#    'storages',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#    'django.middleware.gzip.GZipMiddleware',
+#    'pipeline.middleware.MinifyHTMLMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'
@@ -122,7 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -135,13 +134,16 @@ USE_TZ = True
 # Reference: https://docs.djangoproject.com/en/2.1/howto/static-files/
 #======================= Static Setup ================================
 #STATIC_URL = '/static/'
-STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
+if DEBUG:
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
+
 STATIC_ROOT = 'static/'
 
-#tell django where to look when running collectstatic - literally
+# tell django the full path to the location of all static assets
 STATICFILES_DIRS = [
-# pretty sure we don't need this.
-    os.path.join(os.path.dirname(__file__), '..', 'components/bower_components'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 #tell django where to look when running collectstatic - via custom classes
@@ -160,10 +162,16 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 #======================= Pipeline Setup ================================
 PIPELINE = {
     'PIPELINE_ENABLED': True,
+    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+    'COMPILERS': {
+        'pipeline.compilers.sass.SASSCompiler',
+    },
     'STYLESHEETS': {
         'styles': {
             'source_filenames': (
               'bootstrap/dist/css/bootstrap.css',
+              '../mysite/static/css/*'
             ),
             'output_filename': 'styles.css',
             'extra_context': {
@@ -195,30 +203,3 @@ BOWER_INSTALLED_APPS = (
     'underscore',
     'd3',
 )
-
-#======================= AWS Static File Storage ====================
-# Reference: https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
-#======================= AWS Static File Storage ====================
-'''
-AWS_S3_OBJECT_PARAMETERS = {
-    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-    'CacheControl': 'max-age=94608000',
-}
-
-AWS_STORAGE_BUCKET_NAME = 'zappa-bg95bqbw1'
-AWS_S3_REGION_NAME = 'us-west-2'
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_DEFAULT_ACL = None
-
-# Tell django-storages the domain to use to refer to static files.
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
-# Tell the staticfiles app to use S3Boto3 storage when writing the collected static files (when
-# you run `collectstatic`).
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-STATICFILES_LOCATION = 'static'
-MEDIAFILES_LOCATION = 'media'
-DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-'''
