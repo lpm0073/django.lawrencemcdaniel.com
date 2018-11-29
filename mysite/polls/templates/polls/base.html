@@ -1,4 +1,4 @@
-{% load static %}
+{% load static from staticfiles %}
 {% load pipeline %}
 
 <!DOCTYPE html>
@@ -9,7 +9,6 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>{% block title %}{% endblock %}</title>
 
-      <!-- Pipeline bundled css -->
       {% stylesheet 'pollsX' %}
       {% if debug %}
         <!-- add stuff that only links when in Debug mode -->

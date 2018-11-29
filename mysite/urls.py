@@ -23,5 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
+# Add our local static folder with results of collectstatic
+# this points to ../static
+#https://docs.djangoproject.com/en/2.1/ref/contrib/staticfiles/
 if settings.DEBUG == True:
     urlpatterns += staticfiles_urlpatterns()

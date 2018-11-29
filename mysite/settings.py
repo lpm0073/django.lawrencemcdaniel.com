@@ -10,6 +10,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import environ
 
+
+# load .env file, which contains sensitive information that we don't want uploaded to github or AWS
+environ.Env.read_env()
+
 # required for tracking DEBUG value in templates
 # Reference: https://stackoverflow.com/questions/1271631/how-to-check-the-template-debug-flag-in-a-django-template/1271914
 INTERNAL_IPS = (
@@ -20,12 +24,11 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
 )
-# reading .env file
-environ.Env.read_env()
 
 # False if not in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
+DEBUG = False
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -129,43 +132,50 @@ USE_L10N = True
 USE_TZ = True
 
 
-#======================= Static Setup ================================
+#======================= Static runt-time config ================================
 # Static files (CSS, JavaScript, Images)
 # Reference: https://docs.djangoproject.com/en/2.1/howto/static-files/
-#======================= Static Setup ================================
+#================================================================================
 if DEBUG:
     STATIC_URL = '/static/'
 else:
     STATIC_URL = 'https://s3-us-west-2.amazonaws.com/zappa-bg95bqbw1/static/'
+
+
+#======================= collectstatic config ================================
+# Static files (CSS, JavaScript, Images)
+# Reference: https://docs.djangoproject.com/en/2.1/howto/static-files/
+#======================= collectstatic config ================================
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # tell django the full path to the location of all static assets
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'mysite', 'polls', 'staticfiles'),
+     os.path.join(BASE_DIR, 'mysite', 'polls', 'staticfiles'),
 ]
 
 #tell django where to look when running collectstatic - via custom classes
 STATICFILES_FINDERS = (
-    'pipeline.finders.FileSystemFinder',
-    'pipeline.finders.AppDirectoriesFinder',
-    'pipeline.finders.CachedFileFinder',
-    'pipeline.finders.PipelineFinder',
     'djangobower.finders.BowerFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'pipeline.finders.PipelineFinder',
 )
 #Reference: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#django.contrib.staticfiles.storage.ManifestStaticFilesStorage
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+# XXX STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineCachedStorage'
+
+#STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+#STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 #======================= Pipeline Setup ================================
 # Reference: https://django-pipeline.readthedocs.io/en/latest/
-#    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
-#    'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
 #    'COMPILERS': {
 #        'pipeline.compilers.sass.SASSCompiler',
 #    },
-#'PIPELINE_ENABLED': True,
-#'popper.js/dist/popper.js',
+#
+#    'PIPELINE_ENABLED': True,
 #======================= Pipeline Setup ================================
 PIPELINE = {
     'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
@@ -174,6 +184,7 @@ PIPELINE = {
         'pollsX': {
             'source_filenames': (
               'bootstrap/dist/css/bootstrap.css',
+              'css/mystyles.css'
             ),
             'output_filename': 'styles.css',
             'extra_context': {
@@ -187,6 +198,7 @@ PIPELINE = {
               'jquery/dist/jquery.js',
               'popper.js/dist/popper.js',
               'bootstrap/dist/js/bootstrap.js',
+              'js/myscripts.js'
             ),
             'output_filename': 'bundle.js',
         }
